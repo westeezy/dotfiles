@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# set up symlinks for vim on work laptop
+
+ln -sf ~/.dotfiles/vim/.vim ~/.vim
+ln -s ~/.dotfiles/vim/.vim ~/.vim
+
+echo ".vimrc and .vim are linked"

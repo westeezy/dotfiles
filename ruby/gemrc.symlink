@@ -4,3 +4,4 @@
 :backtrace: false
 :benchmark: false
 gem: --no-document
+gem: --no-document
