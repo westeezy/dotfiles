@@ -2,10 +2,17 @@ execute pathogen#infect()
 filetype plugin indent on
 
 " first things first..
+<<<<<<< abd468ce575d270636d7fd3b6db52d5367369571
 "let mapleader = ","
 set nocompatible
 set shiftwidth=2
 set tabstop=2
+=======
+let mapleader = ","
+set nocompatible
+set shiftwidth=4
+set tabstop=4
+>>>>>>> Updates
 set expandtab
 set smarttab
 set textwidth=0
@@ -13,9 +20,12 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set fillchars+=vert:\ 
 
+<<<<<<< abd468ce575d270636d7fd3b6db52d5367369571
 let loaded_matchparen=1 "do not highlight opening paren
 
 
+=======
+>>>>>>> Updates
 set ruler "always show cursor
 
 " fix for typoes
@@ -40,10 +50,17 @@ set updatecount=100
 " colours
 syntax on
 syntax enable
+<<<<<<< abd468ce575d270636d7fd3b6db52d5367369571
 "let g:onedark_termcolors=256
 "let g:onedark_termtrans = 1
 "set t_Co=256
 "set background=dark
+=======
+let g:onedark_termcolors=256
+"let g:onedark_termtrans = 1
+set t_Co=256
+set background=dark
+>>>>>>> Updates
 
 filetype on
 filetype indent on

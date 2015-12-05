@@ -137,3 +137,10 @@ let g:jsx_ext_required = 0
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
+" Wrap gitcommit file types at the appropriate length
+filetype indent plugin on
+
+set hidden
+autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') != '' ? ['eslint'] : ['standard']
+
+set nonu

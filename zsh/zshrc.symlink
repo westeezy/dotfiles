@@ -60,5 +60,4 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-# Add Git Status to Prompt
 source ~/.dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh

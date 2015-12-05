@@ -63,10 +63,6 @@
 	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/dotvim/bundle/ack.vim"]
 	path = vim/dotvim/bundle/ack.vim
-	url = https://github.com/mileszs/ack.vim.git
-[submodule "zsh/plugins/zsh-history-substring-search"]
-	path = zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search.git
 [submodule "vim/dotvim/bundle/scss-syntax.vim"]
 	path = vim/dotvim/bundle/scss-syntax.vim
 	url = https://github.com/cakebaker/scss-syntax.vim.git
