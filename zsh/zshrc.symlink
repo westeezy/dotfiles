@@ -7,7 +7,7 @@ export PROJECTS=~/Code
 
 export PATH=/usr/local/share/npm/bin:$PATH
 
-source dnvm.sh
+#source dnvm.sh
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
@@ -45,7 +45,9 @@ done
 
 unset config_files
 
-source ~/.nvm/nvm.sh
+#source ~/.nvm/nvm.sh
+export NVM_DIR=~/.nvm
+. $(brew --prefix nvm)/nvm.sh
 source ~/.dotfiles/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh
 
 zmodload zsh/terminfo
@@ -57,3 +59,6 @@ bindkey '^[[B' history-substring-search-down
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Add Git Status to Prompt
+source ~/.dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh
