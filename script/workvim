@@ -2,7 +2,7 @@
 #
 # set up symlinks for vim on work laptop
 
-ln -sf ~/.dotfiles/vim/.vim ~/.vim
-ln -s ~/.dotfiles/vim/.vim ~/.vim
+ln -sf ~/.dotfiles/vim/dotvim ~/.vim
+ln -s ~/.dotfiles/vim/dotvim ~/.vim
 
 echo ".vimrc and .vim are linked"
