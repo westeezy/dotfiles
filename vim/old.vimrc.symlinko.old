@@ -1,9 +1,0 @@
-syntax on
-
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
-
-set hidden
-autocmd FileType javascript let b:syntastic_checkers = findfile('.eslintrc', '.;') != '' ? ['eslint'] : ['standard']
-
-set nonu
