@@ -1,0 +1,234 @@
+" download vim-plug if missing
+if empty(glob("~/.vim/autoload/plug.vim"))
+  silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * silent! PlugInstall
+endif
+
+call plug#begin()
+" --- Language Support ---
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/html5.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'leafgarland/typescript-vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+
+" --- tpope ---
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+
+" --- NERD TREE ---
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+
+" --- Git ---
+Plug 'sjl/gundo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" --- Search and Navigation ---
+Plug 'mileszs/ack.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'matze/vim-move'
+
+" --- Status Bar ---
+Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline'
+
+" --- Auto Complete ---
+Plug 'ervandew/supertab' " tab autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" --- Themes ---
+Plug 'trevordmiller/nova-vim'
+
+" --- Misc ---
+Plug 'bronson/vim-trailing-whitespace' " highlight whitespace EOL
+Plug 'tmhedberg/matchit' " match xml/html tags
+call plug#end()
+
+filetype plugin indent on
+
+let mapleader = ","
+set nocompatible
+set shiftwidth=2
+set tabstop=2
+set expandtab
+set textwidth=0
+set encoding=utf-8
+set fillchars+=vert:\
+
+" dont redraw during macro
+set lazyredraw
+
+" remove spaces at end of line on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Source Vim configuration file and install plugins
+nnoremap <silent><leader>1 :source ~/.vimrc \| :PlugInstall<CR>
+
+" Open Vim configuration file for editing
+nnoremap <silent><leader>2 :e ~/.vimrc<CR>
+
+" fix for typoes
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+
+" indent
+set smartindent
+set copyindent
+set preserveindent
+
+" backup dirs
+set nobackup
+set nowritebackup
+set noswapfile
+set undolevels=1000
+set updatecount=100
+
+" colours
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
+colorscheme nova
+
+"if using neovim use true color
+if has("nvim")
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+" wildmenu
+set wildmode=list:longest
+
+" turn off bell
+set visualbell
+
+" use system clipboard
+set clipboard=unnamed
+
+"set notitle
+"
+" make searches better
+set ttyfast
+set showmatch
+set ignorecase
+set smartcase
+set hlsearch
+
+set number
+"set mouse=a
+set showcmd
+set nostartofline
+set scrolloff=2
+set hidden
+set laststatus=2
+
+set complete=.,w,b,u,U,t,i,d
+set completeopt=menu,longest,preview
+
+" automatically cd to current dir
+set autochdir
+
+" highlight current line
+set cul
+
+" w!! will ask for sudo
+cmap w!! %!sudo tee > /dev/null %
+
+" keybindings
+nmap j gj
+nmap k gk
+inoremap jj <Esc>
+:nnoremap <C-d> :bdelete<CR>
+
+" code folding
+set foldmethod=syntax
+set foldlevel=99
+nmap z za " z key to fold
+
+set pastetoggle=<F2>
+set iskeyword-=_
+
+autocmd FileType ruby set sw=2
+
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
+" gundo
+nnoremap <F5> :GundoToggle<CR>
+
+" nerdtree
+let NERDTreeQuitOnOpen=0
+map <C-\> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeFind<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" ctrlp
+set wildignore+=*.so,*.swp,*.zip,*.class,*.jar
+let g:ctrlp_working_path_mode = "ra"
+let g:ctrlp_custom_ignore = {
+    \ 'dir':    '\v[\/](\.(git|hg|svn)|node_modules|bower_components|target)$',
+    \ 'file':   '',
+    \ 'link':   '',
+    \ }
+
+" MacVim
+set guioptions-=L
+set guioptions-=r
+
+" vim-move
+let g:move_key_modifier = 'C'
+
+"autocmd BufWritePre *.js :normal gggqG
+"autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+let g:prettier#autoformat_require_pragma = 0
+
+" CoC extensions
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
+
+" Add CoC Prettier if prettier is installed
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+" Add CoC ESLint if ESLint is installed
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+
+" set to help speedup coc complete
+set updatetime=300
+
+" coc shortcuts
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Extra <CR> is for disabling /"Press ENTER or type command to continue/"
+nnoremap <silent><leader>e :Exp<CR><CR>
