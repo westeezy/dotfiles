@@ -17,6 +17,7 @@ brew 'Schniz/tap/fnm'
 brew 'bat'
 brew 'diff-so-fancy'
 brew 'antigen'
+brew 'git-delta'
 
 cask 'google-chrome'
 cask 'spotify'

@@ -27,7 +27,7 @@ Plug 'scrooloose/nerdcommenter'
 
 " --- Git ---
 Plug 'sjl/gundo.vim'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " --- Search and Navigation ---
@@ -45,6 +45,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " --- Themes ---
 Plug 'trevordmiller/nova-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " --- Misc ---
 Plug 'bronson/vim-trailing-whitespace' " highlight whitespace EOL
@@ -60,7 +61,12 @@ set tabstop=2
 set expandtab
 set textwidth=0
 set encoding=utf-8
-set fillchars+=vert:\
+
+" --- Hide Window Divider Line ---
+set statusline=-        " hide file name in statusline
+set fillchars=stl:-     " fill active window's statusline with -
+set fillchars+=stlnc:-  " also fill inactive windows
+set fillchars+=vert:\|  " add a bar for vertical splits
 
 " dont redraw during macro
 set lazyredraw
@@ -96,7 +102,7 @@ set updatecount=100
 if $TERM_PROGRAM =~ "iTerm"
   set termguicolors
 endif
-colorscheme nova
+colorscheme dracula
 
 "if using neovim use true color
 if has("nvim")

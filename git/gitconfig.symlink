@@ -13,11 +13,12 @@
         diff = auto
         status = auto
         branch = auto
-        ui = true
+	ui = true
 [core]
         excludesfile = ~/.gitignore
         editor = vim
-	      pager = diff-so-fancy | less --tabs=4 -RFX
+	      #pager = diff-so-fancy | less --tabs=4 -RFX
+	      pager = delta
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -47,3 +48,7 @@
 [user]
 	email = element9889@gmail.com
 	name = westeezy
+[delta]
+  syntax-theme = Dracula
+  line-numbers = true
+
