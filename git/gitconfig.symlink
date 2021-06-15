@@ -46,8 +46,8 @@
 	new = green bold
 	whitespace = red reverse
 [user]
-	email = element9889@gmail.com
-	name = westeezy
+	email = Westin.Wrzesinski@spiderrock.net
+	name = Westin Wrzesinski
 [delta]
   syntax-theme = Dracula
   line-numbers = true

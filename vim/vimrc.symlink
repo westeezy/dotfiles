@@ -151,7 +151,7 @@ cmap w!! %!sudo tee > /dev/null %
 nmap j gj
 nmap k gk
 inoremap jj <Esc>
-:nnoremap <C-d> :bdelete<CR>
+":nnoremap <C-d> :bdelete<CR>
 
 " code folding
 set foldmethod=syntax
