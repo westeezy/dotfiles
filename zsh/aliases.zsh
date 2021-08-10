@@ -17,3 +17,5 @@ alias dotfiles="cd ~/.dotfiles"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+alias serve="python3 -m http.server 8001"

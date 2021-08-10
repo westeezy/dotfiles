@@ -7,12 +7,13 @@ endif
 call plug#begin()
 " --- Language Support ---
 Plug 'AndrewRadev/tagalong.vim'
+Plug 'alvan/vim-closetag'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'leafgarland/typescript-vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
 
 
 " --- tpope ---
@@ -43,13 +44,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'ervandew/supertab' " tab autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" --- 'Console' ---
+"Plug 'kyazdani42/nvim-web-devicons'
+"Plug 'folke/trouble.nvim'
+
 " --- Themes ---
-Plug 'trevordmiller/nova-vim'
+"Plug 'trevordmiller/nova-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " --- Misc ---
 Plug 'bronson/vim-trailing-whitespace' " highlight whitespace EOL
 Plug 'tmhedberg/matchit' " match xml/html tags
+Plug 'editorconfig/editorconfig-vim' " editorconfig
 call plug#end()
 
 filetype plugin indent on
@@ -99,9 +105,10 @@ set undolevels=1000
 set updatecount=100
 
 " colours
-if $TERM_PROGRAM =~ "iTerm"
-  set termguicolors
-endif
+let g:dracula_colorterm=0
+"if $TERM_PROGRAM =~ "iTerm"
+set termguicolors
+"endif
 colorscheme dracula
 
 "if using neovim use true color
@@ -114,6 +121,8 @@ set wildmode=list:longest
 
 " turn off bell
 set visualbell
+set belloff=esc
+set t_vb=
 
 " use system clipboard
 set clipboard=unnamed
@@ -172,6 +181,7 @@ nnoremap <F5> :GundoToggle<CR>
 
 " nerdtree
 let NERDTreeQuitOnOpen=0
+let NERDTreeShowHidden=1
 map <C-\> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -191,29 +201,45 @@ let g:syntastic_check_on_wq = 0
 set wildignore+=*.so,*.swp,*.zip,*.class,*.jar
 let g:ctrlp_working_path_mode = "ra"
 let g:ctrlp_custom_ignore = {
-    \ 'dir':    '\v[\/](\.(git|hg|svn)|node_modules|bower_components|target)$',
-    \ 'file':   '',
-    \ 'link':   '',
-    \ }
+      \ 'dir':    '\v[\/](\.(git|hg|svn)|node_modules|bower_components|target)$',
+      \ 'file':   '',
+      \ 'link':   '',
+      \ }
 
 " MacVim
 set guioptions-=L
 set guioptions-=r
 
+" close tags
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_filetypes = 'html,xhtml,phtml'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
+
 " vim-move
 let g:move_key_modifier = 'C'
 
-"autocmd BufWritePre *.js :normal gggqG
-"autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
-let g:prettier#autoformat_require_pragma = 0
-
 " CoC extensions
-let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
+let g:coc_global_extensions = ['coc-lists', 'coc-tsserver', 'coc-json', 'coc-flow']
+let g:coc_global_extensions += ['coc-prettier']
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+map <leader>p :Prettier<CR>
 
-" Add CoC Prettier if prettier is installed
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
+"augroup toggleCocExtensions
+    "autocmd!
+    "autocmd BufEnter *.ts,*.tsx call CocActionAsync('deactivateExtension', 'coc-flow')
+"augroup END
 
 " Add CoC ESLint if ESLint is installed
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
@@ -229,12 +255,26 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
-
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 " Extra <CR> is for disabling /"Press ENTER or type command to continue/"
 nnoremap <silent><leader>e :Exp<CR><CR>
+
+" use ag if available
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif

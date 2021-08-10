@@ -1,6 +1,18 @@
 # Local/private config goes in the include
-[include]
-        path = ~/.gitconfig.local
+[user]
+	email = westin.wrzesinski@gmail.com
+	name = Westin Wrzesinski
+[includeIf "gitdir:~/Code/clientsdknodeweb/"]
+  path = ~/.gitconfig.paypal
+[includeIf "gitdir:~/Code/smartcomponentnodeweb/"]
+  path = ~/.gitconfig.paypal
+[includeIf "gitdir:~/Code/xobuyernodeserv/"]
+  path = ~/.gitconfig.paypal
+[includeIf "gitdir:~/Code/braintree-sdk-integrations/"]
+  path = ~/.gitconfig.paypal
+[includeIf "gitdir:~/Code/adr/"]
+  path = ~/.gitconfig.paypal
+
 [hub]
         protocol = https
 [alias]
@@ -13,7 +25,7 @@
         diff = auto
         status = auto
         branch = auto
-	ui = true
+	      ui = true
 [core]
         excludesfile = ~/.gitignore
         editor = vim
@@ -45,9 +57,6 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
-[user]
-	email = element9889@gmail.com
-	name = westeezy
 [delta]
   syntax-theme = Dracula
   line-numbers = true
