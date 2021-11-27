@@ -2,16 +2,6 @@
 [user]
 	email = westin.wrzesinski@gmail.com
 	name = Westin Wrzesinski
-[includeIf "gitdir:~/Code/clientsdknodeweb/"]
-  path = ~/.gitconfig.paypal
-[includeIf "gitdir:~/Code/smartcomponentnodeweb/"]
-  path = ~/.gitconfig.paypal
-[includeIf "gitdir:~/Code/xobuyernodeserv/"]
-  path = ~/.gitconfig.paypal
-[includeIf "gitdir:~/Code/braintree-sdk-integrations/"]
-  path = ~/.gitconfig.paypal
-[includeIf "gitdir:~/Code/adr/"]
-  path = ~/.gitconfig.paypal
 
 [hub]
         protocol = https

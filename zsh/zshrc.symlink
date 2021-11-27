@@ -74,12 +74,5 @@ test -r /Users/westin/.opam/opam-init/init.zsh && . /Users/westin/.opam/opam-ini
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# Configuration to load nvm - node version manager
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# Configuration for node to trust the PayPal Proxy Certificates
-export NODE_EXTRA_CA_CERTS='/usr/local/etc/openssl/certs/paypal_proxy_cacerts.pem'
-
 # use bat
 alias cat="bat"
