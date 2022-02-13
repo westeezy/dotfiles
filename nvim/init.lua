@@ -18,32 +18,52 @@ vim.cmd [[
   augroup end
 ]]
 
+
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
-
-  -- Performance
-  use 'lewis6991/impatient.nvim'
-
-  -- Git
+  use 'lewis6991/impatient.nvim' -- Performance booster
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  -- End Git
-
-  -- UI
   use 'Mofiqul/dracula.nvim' -- Theme
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- show indentation lines on blank lines
+  use 'folke/which-key.nvim' -- show key map suggestions
 
+  -- Status Line
+  use({
+      'nvim-lualine/lualine.nvim',
+      config= function()
+        require('plugins.lualine')
+      end
+  })
+
+  -- Startup Screen
   use({
       'glepnir/dashboard-nvim',
       config = function()
         require('plugins.dashboard')
       end
   })
-  -- End UI
 
 
+  -- Directory Tree
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    config = function()
+      require('plugins.nvim-tree')
+    end
+  }
+
+
+  -- Code Diagnostics
+  -- TODO: needs to be setup
+  use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+
+
+  -- TODO: investigate below plugins
   -- use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
@@ -58,29 +78,7 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
-
-  -- Directory Tree
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
-    config = function()
-      require('plugins.nvim-tree')
-    end
-  }
-
 end)
-
---Set statusbar
-require('lualine').setup {
-  options = {
-    icons_enabled = false,
-    theme = 'dracula',
-    component_separators = '|',
-    section_separators = '',
-  },
-}
 
 --Enable Comment.nvim
 -- require('Comment').setup()

@@ -32,7 +32,7 @@ opt.wildmenu = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.wildignore = opt.wildignore + { '*/node_modules/*', '*/.git/*', '*/vendor/*', '*/dist/*' }
-opt.hlsearch = false
+opt.hlsearch = true
 
 -- ui
 opt.number = true
