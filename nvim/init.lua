@@ -57,6 +57,14 @@ require('packer').startup(function()
     end
   }
 
+  -- Floating Terminal
+  use({
+    'voldikss/vim-floaterm',
+    config = function()
+      require('plugins.floaterm')
+    end
+  })
+
 
   -- Code Diagnostics
   -- TODO: needs to be setup
