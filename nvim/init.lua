@@ -23,6 +23,7 @@ local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
   use 'lewis6991/impatient.nvim' -- Performance booster
+  use("nathom/filetype.nvim") -- Faster FileType
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'Mofiqul/dracula.nvim' -- Theme
