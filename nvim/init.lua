@@ -10,7 +10,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 
-
 vim.cmd [[
   augroup Packer
     autocmd!
@@ -71,6 +70,15 @@ require('packer').startup(function()
     'rmagatti/auto-session',
     config = function()
       require('plugins.auto-session')
+    end
+  })
+
+  -- TODO Comment Highlighting
+  use({
+    'folke/todo-comments.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('plugins.todo-comments')
     end
   })
 
