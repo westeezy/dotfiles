@@ -30,6 +30,14 @@ require('packer').startup(function()
   use 'lukas-reineke/indent-blankline.nvim' -- show indentation lines on blank lines
   use 'folke/which-key.nvim' -- show key map suggestions
 
+  -- Comments
+  use({
+    'numToStr/Comment.nvim',
+    config = function()
+      require('plugins.comment')
+    end
+  })
+
   -- Status Line
   use({
       'nvim-lualine/lualine.nvim',
@@ -80,9 +88,6 @@ require('packer').startup(function()
   use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
 
-  -- TODO: investigate below plugins
-  -- use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  -- use 'ludovicchabant/vim-gutentags' -- Automatic tags management
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -94,9 +99,6 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
 end)
-
---Enable Comment.nvim
--- require('Comment').setup()
 
 -- Telescope
 require('telescope').setup {
