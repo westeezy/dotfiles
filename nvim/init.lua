@@ -57,6 +57,14 @@ require('packer').startup(function()
     end
   }
 
+  -- Session Management
+  use({
+    'rmagatti/auto-session',
+    config = function()
+      require('plugins.auto-session')
+    end
+  })
+
   -- Floating Terminal
   use({
     'voldikss/vim-floaterm',
