@@ -22,4 +22,5 @@ brew 'git-delta'
 brew 'jq'
 brew 'lazydocker'
 brew 'k9s'
+brew 'antigen'
 
