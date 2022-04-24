@@ -64,7 +64,7 @@ zmodload zsh/terminfo
 eval "$(fnm env)"
 
 # autojump
-[[ -s $(brew --prefix)/etc/autojump.sh ]] && . $(brew --prefix)/etc/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # opam configuration
 test -r /Users/westin/.opam/opam-init/init.zsh && . /Users/westin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

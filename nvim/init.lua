@@ -1,7 +1,3 @@
-require('editor')
-require('mappings')
-require('theme')
-
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
@@ -28,6 +24,33 @@ require('packer').startup(function()
   use 'Mofiqul/dracula.nvim' -- Theme
   use 'lukas-reineke/indent-blankline.nvim' -- show indentation lines on blank lines
   use 'folke/which-key.nvim' -- show key map suggestions
+  use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- selection ui
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- use fzf for fuzzy search
+  use 'nvim-treesitter/nvim-treesitter' -- all sorts of code parsing magic
+  use 'nvim-treesitter/nvim-treesitter-textobjects' -- additional text objects for above
+  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp'
+
+
+  -- Autosave
+  use({
+    "Pocco81/AutoSave.nvim",
+    event = "VimEnter",
+    config = function()
+      vim.defer_fn(function() require('plugins.autosave') end, 1500)
+    end
+  })
+
+  -- notification plugin
+  use({
+    "rcarriga/nvim-notify",
+    event = "BufEnter",
+    config = function()
+      vim.defer_fn(function() require('plugins.notify') end, 2000)
+    end
+  })
 
   -- Comments
   use({
@@ -53,6 +76,14 @@ require('packer').startup(function()
       end
   })
 
+  -- smooth scrolling
+  use({
+    "karb94/neoscroll.nvim",
+    event = "VimEnter",
+    config = function()
+      vim.defer_fn(function() require('plugins.neoscroll') end, 2000)
+    end
+  })
 
   -- Directory Tree
   use {
@@ -73,7 +104,7 @@ require('packer').startup(function()
     end
   })
 
-  -- TODO Comment Highlighting
+  -- Comment Highlighting
   use({
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',
@@ -91,21 +122,6 @@ require('packer').startup(function()
   })
 
 
-  -- Code Diagnostics
-  -- TODO: needs to be setup
-  use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
-
-
-  -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use 'nvim-treesitter/nvim-treesitter'
-  -- Additional textobjects for treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'
 end)
 
 -- Telescope
@@ -241,3 +257,9 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
+
+require('editor')
+require('mappings')
+require('theme')
+
+
