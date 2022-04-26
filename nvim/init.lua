@@ -23,10 +23,7 @@ require('packer').startup(function()
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'Mofiqul/dracula.nvim' -- Theme
   use 'lukas-reineke/indent-blankline.nvim' -- show indentation lines on blank lines
-  use 'folke/which-key.nvim' -- show key map suggestions
   use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- selection ui
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' } -- use fzf for fuzzy search
   use 'nvim-treesitter/nvim-treesitter' -- all sorts of code parsing magic
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- additional text objects for above
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
@@ -76,6 +73,15 @@ require('packer').startup(function()
       end
   })
 
+
+  use({
+    'nvim-telescope/telescope.nvim',
+    requires = {{ 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }},
+    config = function ()
+      require('plugins.telescope')
+    end
+  })
+
   -- smooth scrolling
   use({
     "karb94/neoscroll.nvim",
@@ -121,23 +127,17 @@ require('packer').startup(function()
     end
   })
 
+  -- Key Map Suggestions
+  use({
+    'folke/which-key.nvim',
+    event = "VimEnter",
+    config = function()
+      require('plugins.whichkey')
+    end
+  })
+
 
 end)
-
--- Telescope
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native
-require('telescope').load_extension 'fzf'
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
