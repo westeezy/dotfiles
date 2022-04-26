@@ -22,14 +22,35 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive' -- Git commands in nvim
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use 'Mofiqul/dracula.nvim' -- Theme
-  use 'lukas-reineke/indent-blankline.nvim' -- show indentation lines on blank lines
-  use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+  use({
+    'lukas-reineke/indent-blankline.nvim', -- show indentation lines on blank lines
+    config = function()
+      require('plugins.indent')
+    end
+  })
   use 'nvim-treesitter/nvim-treesitter' -- all sorts of code parsing magic
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- additional text objects for above
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
 
+  -- Startup Screen
+  use({
+      'glepnir/dashboard-nvim',
+      config = function()
+        require('plugins.dashboard')
+      end
+  })
+
+  -- Trouble Diagnostics
+
+  use({
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('plugins.trouble')
+    end
+  })
 
   -- Autosave
   use({
@@ -64,15 +85,6 @@ require('packer').startup(function()
         require('plugins.lualine')
       end
   })
-
-  -- Startup Screen
-  use({
-      'glepnir/dashboard-nvim',
-      config = function()
-        require('plugins.dashboard')
-      end
-  })
-
 
   use({
     'nvim-telescope/telescope.nvim',
@@ -261,5 +273,4 @@ lspconfig.sumneko_lua.setup {
 require('editor')
 require('mappings')
 require('theme')
-
 
