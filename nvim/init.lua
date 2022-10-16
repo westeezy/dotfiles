@@ -42,15 +42,6 @@ require('packer').startup(function()
       end
   })
 
-  -- Trouble Diagnostics
-  use({
-    'folke/trouble.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('plugins.trouble')
-    end
-  })
-
   -- Autosave
   use({
     "Pocco81/auto-save.nvim",
@@ -91,6 +82,15 @@ require('packer').startup(function()
     requires = {{ 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }},
     config = function ()
       require('plugins.telescope')
+    end
+  })
+
+  -- Trouble Diagnostics
+  use({
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('plugins.trouble')
     end
   })
 

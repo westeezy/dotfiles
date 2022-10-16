@@ -23,4 +23,6 @@ brew 'jq'
 brew 'lazydocker'
 brew 'k9s'
 brew 'antigen'
+brew 'fd'
+brew 'ripgrep'
 
