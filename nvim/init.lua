@@ -53,10 +53,10 @@ require('packer').startup(function()
 
   -- Autosave
   use({
-    "Pocco81/AutoSave.nvim",
+    "Pocco81/auto-save.nvim",
     event = "VimEnter",
     config = function()
-      vim.defer_fn(function() require('plugins.autosave') end, 1500)
+      vim.defer_fn(function() require('plugins.auto-save') end, 1500)
     end
   })
 
@@ -147,7 +147,6 @@ require('packer').startup(function()
       require('plugins.whichkey')
     end
   })
-
 end)
 
 require('editor')
