@@ -4,7 +4,7 @@
 
 | Alias    | Command |
 |----------|---------|
-| git checkout | git co          |
+| git co       | git checkout          |
 | gl           | git pull --prune|
 | glog         | git log         |
 | gp           | git push origin HEAD|
