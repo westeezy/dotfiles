@@ -278,3 +278,4 @@ nnoremap <silent><leader>e :Exp<CR><CR>
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
